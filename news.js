@@ -7,6 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // 【公告】分頁的資料
     const announcementData = [
+		{
+            date: "2026.06.07",
+            tag: "更新",
+            class: "tag-upd",
+            title: "【v0.1.4】新版本已上線",
+            content: "版本 0.1.4 安裝檔已放置在下載區。"
+        },
 	    {
             date: "2026.06.07",
             tag: "活動",
@@ -25,12 +32,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 【譜面】分頁的資料
     const chartData = [
+		{
+            date: "2026.06.07",
+            tag: "圖譜",
+            class: "tag-map",
+            title: "譜面追加",
+            content: "曲名: Aegleseeker [mtk's Inner Oni]<br>作曲家: Silentroom vs. Frums<br>譜面製作者: Faputa (From osu!)<br>LV14+<br>BPM: 234<br>時長: 2:25<br>sS13"
+        },
+		{
+            date: "2026.06.07",
+            tag: "圖譜",
+            class: "tag-map",
+            title: "譜面追加",
+            content: "曲名: 未来のヒーローたちへ (TV Size) [Oni]<br>作曲家: タケヤキ翔<br>譜面製作者: [-E S I A-] (From osu!)<br>LV08<br>BPM: 185<br>時長: 1:28<br>sS10"
+        },
+		{
+            date: "2026.06.07",
+            tag: "圖譜",
+            class: "tag-map",
+            title: "譜面追加",
+            content: "曲名: A Bella! (feat. Lucy) [Chromoxx' Inner Oni]<br>作曲家: M2U<br>譜面製作者: ZiRoX (From osu!)<br>LV09<br>BPM: 160<br>時長: 1:59<br>sS10"
+        },
         {
             date: "2026.06.07",
             tag: "圖譜",
             class: "tag-map",
             title: "譜面追加",
-            content: "曲名: ...and Rescue Me (TV Size)<br>作曲家: Rainy.<br>譜面製作者: Charlotte (From osu!)<br>LV07<br>BPM: 129<br>時長: 1:17<br>AR9"
+            content: "曲名: ...and Rescue Me (TV Size)<br>作曲家: Rainy.<br>譜面製作者: Charlotte (From osu!)<br>LV07<br>BPM: 129<br>時長: 1:17<br>sS9"
         }
     ];
 
