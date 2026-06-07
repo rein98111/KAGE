@@ -1,0 +1,461 @@
+/* ==========================================================================
+   1. 全局基礎樣式與背景
+   ========================================================================== */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #000000;
+    font-family: "Microsoft JhengHei", sans-serif;
+    color: #ffffff;
+}
+
+body {
+    /* 讓 HTML 傳進來的背景圖固定在螢幕 */
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+
+    /* ==========================================================================
+       【核心新增】強迫 body 變成垂直 Flex 容器
+       ========================================================================== */
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   全新修訂：極簡高對比黑白梯形導覽列 (Navbar)
+   ========================================================================== */
+.navbar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 60px;
+    box-sizing: border-box;
+    /* 1. 改為極深純黑背景，並帶有一點點透明度與毛玻璃 */
+    background: rgba(5, 5, 8, 0.9); 
+    /* 2. 邊框改成低調的半透明純白線條 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 9999;
+}
+
+/* 左側 Logo 容器 */
+.nav-logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* 左側 Logo 的外層固定容器 */
+.nav-logo-wrapper {
+    position: relative;
+    width: 100px;  /* 給予一個固定的寬度撐開空間，避免大圖片擠壓到右邊分頁 */
+    height: 100%;
+}
+
+/* Logo 點擊連結與定位 */
+.nav-logo-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    height: auto;
+    z-index: 10000; /* 確保圖片永遠浮在導覽列底線的上方 */
+}
+
+/* 【核心修改】讓 Icon 變大並溢出導覽列 */
+.logo-img {
+    height: 150px;       /* 1. 放大高度（原為45px），直接超越導覽列的 75px */
+    width: auto;
+    object-fit: contain;
+    
+    /* 2. 稍微往上移一點點（例如 -5px），可以讓它向下突出的層次感更好看 */
+    transform: translateY(10px); 
+    
+    /* 3. 沿用你的黑白黑風格光暈 */
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.4)); 
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 右側分頁群組 */
+.nav-tabs {
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+}
+
+/* 單個分頁基礎樣式（微調基礎高度，讓上下排列更舒適） */
+.nav-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    height: 64px; /* 基礎高度從 58px 提高到 64px */
+    margin-left: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%);
+    background: rgba(255, 255, 255, 0.01);
+    border-top: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 【修改】現在英文在下方，變成副標題 */
+.nav-item .nav-text {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;          /* 縮小英文字體 */
+    font-weight: bold;
+    color: #333333;          /* 比中文更暗一點的深灰，襯托層次 */
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+/* 【修改】現在中文在上方，變成主標題（放大） */
+.nav-item .nav-sub {
+    font-size: 16px;          /* 放大中文字體 */
+    font-weight: bold;        /* 加上粗體顯得大氣 */
+    color: #555555;          /* 未選中時是一樣的深灰色 */
+    letter-spacing: 2px;      /* 讓中文字稍微撐開一點，很有字體設計感 */
+    margin-bottom: 2px;       /* 跟下方英文保持微小間距 */
+    transition: all 0.3s;
+}
+
+/* ==========================================================================
+   狀態觸發（Hover & Active）- 純白高亮效果
+   ========================================================================== */
+
+/* 滑鼠懸停（Hover）：向上微幅伸展 */
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    height: 70px; /* Hover 時一樣對應抽高 */
+}
+.nav-item:hover .nav-sub {
+    color: #bbbbbb; /* 中文變亮 */
+}
+.nav-item:hover .nav-text {
+    color: #777777; /* 英文稍微變亮 */
+}
+
+/* 當前激活選中（Active） */
+.nav-item.active {
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.001));
+    border-top: 2px solid #ffffff;
+    height: 70px;
+}
+.nav-item.active .nav-sub {
+    color: #ffffff; /* 中文點亮成純白 */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+.nav-item.active .nav-text {
+    color: #ffffff; /* 英文點亮成純白 */
+    opacity: 0.6;   /* 讓英文帶點透明度，視覺上更有高級感 */
+}
+
+/* Active 狀態下的純白發光短底線 */
+.nav-item.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 55%;
+    height: 3px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   5. 首頁核心內容與雙層斜切大按鈕（保證 100% 顯示粗黑外框）
+   ========================================================================== */
+
+/* 滿版容器：負責將按鈕固定在網頁中間偏下方 */
+.hero-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; 
+    width: 100%;
+    min-height: 100vh; 
+    box-sizing: border-box;
+    padding-bottom: 12vh; 
+}
+
+/* 【核心新增】黑框外層：利用 padding 大小來決定邊框粗細（這裡設 3px 就是 3px 粗框） */
+.btn-border-wrapper {
+    background: #000000;   /* 純黑外框底色 */
+    padding: 3px;          /* 精準控制四周外框都是 3px 粗 */
+    
+    /* 與內層相同的斜切平行四邊形 */
+    clip-path: polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%);
+    
+    /* 淡淡的環境白色暈光，讓黑框在全黑背景中也能被看見 */
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 內層：白色按鈕本體 */
+.btn-download {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 320px;          
+    height: 75px;
+    text-decoration: none;
+    cursor: pointer;
+    background: #ffffff;   /* 純白底色 */
+    
+    /* 內層也要切，這樣兩層疊加才會完美平行 */
+    clip-path: polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 按鈕內：中文主標題 */
+.btn-download .btn-main-text {
+    font-size: 20px;       
+    font-weight: 900;      
+    color: #000000;       
+    letter-spacing: 2px;
+}
+
+/* 按鈕內：英文副標題 */
+.btn-download .btn-sub-text {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: bold;
+    color: #666666;       
+    letter-spacing: 3px;
+    margin-bottom: 2px;
+}
+
+/* ==========================================================================
+   滑鼠懸停互動（Hover）- 針對雙層結構優化
+   ========================================================================== */
+
+/* 當滑鼠移入時，外框層整體往上飄，且外框顏色從「純黑」變成「純白」 */
+.btn-border-wrapper:hover {
+    background: #ffffff;   /* 外框變成純白 */
+    transform: translateY(-5px); 
+    filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.6));
+}
+
+/* 當滑鼠移入時，內層按鈕從「純白」變成「純黑」，文字變白色（完美反相） */
+.btn-border-wrapper:hover .btn-download {
+    background: #000000;   
+}
+
+.btn-border-wrapper:hover .btn-main-text {
+    color: #ffffff;        
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.btn-border-wrapper:hover .btn-sub-text {
+    color: #bbbbbb;        
+}
+
+/* ==========================================================================
+   7. 官方網站通用頁尾樣式 (Footer)
+   ========================================================================== */
+.site-footer {
+    width: 100%;
+    background: rgba(5, 5, 8, 0.95); /* 與導覽列呼應的極深黑 */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* 頂部低調細白線 */
+    padding: 40px 60px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 100;
+/* ==========================================================================
+       【修改】去掉原本固定的 margin-top，改為自動推擠
+       ========================================================================== */
+    margin-top: auto; /* 當上方內容不夠多時，這行會自動把 footer 推到最底 */
+    padding-top: 40px;
+}
+
+/* 頁尾三欄式排版容器 */
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+/* --------------------------------------------------------------------------
+   【左側欄】工作室與版權
+   -------------------------------------------------------------------------- */
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+}
+
+.footer-team-logo {
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 3px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.footer-copyright {
+    font-size: 11px;
+    color: #555555; /* 低調深灰字 */
+    line-height: 1.8;
+}
+
+.footer-copyright p {
+    margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   【中間欄】條款連結
+   -------------------------------------------------------------------------- */
+.footer-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+}
+
+.footer-links a {
+    color: #888888;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.footer-link-divider {
+    color: #333333;
+    margin: 0 15px;
+    font-size: 13px;
+}
+
+/* --------------------------------------------------------------------------
+   【右側欄】遊戲分級與警語（修正為普遍級樣式）
+   -------------------------------------------------------------------------- */
+.footer-right {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex: 1.5;
+    max-width: 600px;
+}
+
+/* 台灣普遍級標章：進化為硬核科技螢光綠風 */
+.rating-badge-general {
+    width: 56px;
+    height: 56px;
+    /* ==========================================================================
+       【修改】將邊框與文字改為極具科技感的螢光綠，並加上微弱的綠色發光
+       ========================================================================== */
+    border: 2px solid #00ff66; /* 普遍級標準科技綠 */
+    background: #000000;       /* 維持純黑底襯托高對比 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.3); /* 綠色環境暈光 */
+}
+
+.rating-badge-general .badge-num {
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    font-weight: 900;
+    color: #00ff66; /* 數字變綠色 */
+    line-height: 1;
+}
+
+.rating-badge-general .badge-text {
+    font-size: 9px;
+    font-weight: bold;
+    color: #00ff66; /* 文字變綠色 */
+    margin-top: 2px;
+}
+
+/* 警語列表樣式 */
+.warning-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.warning-list li {
+    font-size: 11px;
+    color: #666666; /* 偏暗的警語文字，避免喧賓奪主 */
+    line-height: 1.7;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   【全新修正】首頁右側垂直極簡黑白「純圖示」按鈕群組
+   ========================================================================== */
+
+/* 右側按鈕群組定位外殼 */
+.side-social-group {
+    position: absolute;
+    right: 60px;       /* 與導覽列兩側對齊 */
+    bottom: 12vh;      /* 與中間下載按鈕等高平齊 */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;         /* 圖示按鈕之間的緊密間距 */
+    z-index: 10;
+}
+
+/* 單個圖示按鈕基礎：極簡黑底、低調細白邊正方形 */
+.social-icon-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;       /* 精緻的 50x50 正方形 */
+    height: 50px;
+    background: rgba(0, 0, 0, 0.8); /* 預設純黑底 */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* 淡淡的白邊框 */
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 圖示本體樣式 */
+.social-icon-btn i {
+    font-size: 20px;   /* 圖示大小比例適中 */
+    color: #ffffff;    /* 預設純白圖示 */
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* ==========================================================================
+   滑鼠懸停互動（Hover）- 完美黑白反相與向左滑出特效
+   ========================================================================== */
+
+.social-icon-btn:hover {
+    background: #ffffff; /* 懸停時底色翻轉為純白 */
+    border-color: #ffffff;
+    transform: translateX(-5px); /* 微幅向左探出 */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* 純白環境光暈 */
+}
+
+/* 懸停時，圖示本體翻轉為純黑色 */
+.social-icon-btn:hover i {
+    color: #000000;
+    transform: scale(1.1); /* 圖示微微放大，增加動態回饋 */
+}

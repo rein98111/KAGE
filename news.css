@@ -1,0 +1,247 @@
+/* ==========================================================================
+   新聞公告頁面專屬樣式 (news.css)
+   ========================================================================== */
+
+/* 新聞滿版容器：預留上方導覽列的空間，並將面板置中 */
+.news-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 130px 20px 60px 20px; 
+}
+
+/* 核心：半透明極簡黑科技公告面板 */
+.news-panel {
+    width: 100%;
+    max-width: 900px; 
+    background: rgba(0, 0, 0, 0.75); 
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    padding: 40px;
+    box-sizing: border-box;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+/* 切換鈕外殼 */
+.panel-tabs {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* 單個切換按鈕：極簡黑白斜切造型 */
+.panel-tab-btn {
+    font-family: "Microsoft JhengHei", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #888888;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 24px;
+    cursor: pointer;
+    /* 呼應主視覺的平行四邊形斜切 */
+    clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+    transition: all 0.25s ease;
+}
+
+/* 滑鼠懸停時微亮 */
+.panel-tab-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* 當前選中的標籤：純黑底、純白字、高對比發光 */
+.panel-tab-btn.active {
+    color: #000000;
+    background: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* 面板頂部標題區 */
+.panel-header {
+    border-bottom: 2px solid #ffffff; 
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.panel-title-en {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: bold;
+    color: #666666;
+    letter-spacing: 4px;
+}
+
+.panel-title-zh {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 5px 0 0 0;
+    letter-spacing: 2px;
+}
+
+/* 新聞列表容器 */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px; 
+    background: rgba(255, 255, 255, 0.1); 
+}
+
+/* 預設所有的內容群組都是隱藏的 */
+.news-list-group {
+    display: none;
+    flex-direction: column;
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* 只有被加上 .active 的群組才會顯示出來 */
+.news-list-group.active {
+    display: flex;
+}
+
+/* 單條新聞通欄 */
+.news-item-row {
+    display: flex;
+    align-items: center;
+    background: #000000; 
+    padding: 20px 15px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-sizing: border-box;
+}
+
+/* 新聞左側：日期與標籤的組合包 */
+.news-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 240px; 
+    flex-shrink: 0;
+}
+
+/* 日期樣式 */
+.news-date {
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    color: #888888;
+    letter-spacing: 1px;
+}
+
+/* 斜切分類標籤基礎樣式 */
+.news-tag {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: bold;
+    color: #000000;
+    background: #ffffff;
+    padding: 3px 12px;
+    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+    min-width: 70px;
+    text-align: center;
+}
+
+/* 標籤顏色定義 */
+.tag-map { background: #bbffbb; color: #000000; }
+.tag-upd { background: #ff9797; color: #000000; }
+.tag-ann  { background: #acd6ff; color: #000000; }
+.tag-eve  { background: #ffed97; color: #000000; }
+
+/* 新聞右側：標題文字 */
+.news-title {
+    font-size: 16px;
+    color: #dddddd;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    transition: color 0.25s ease;
+}
+
+/* 滑鼠懸停互動 (Hover) */
+.news-item-row:hover {
+    background: rgba(255, 255, 255, 0.05); 
+    padding-left: 25px; 
+}
+
+.news-item-row:hover .news-title {
+    color: #ffffff; 
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.news-item-row:hover .news-date {
+    color: #ff
+}
+
+/* ==========================================================================
+   【新增】公告點擊向下攤開 (Accordion) 視覺樣式
+   ========================================================================== */
+
+/* 包裹外殼 */
+.news-item-wrapper-box {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 點擊標題列改為游標手指 */
+.news-item-row {
+    cursor: pointer;
+    position: relative;
+}
+
+/* 科技感右側小箭頭 */
+.news-arrow {
+    font-size: 10px;
+    color: #444444;
+    margin-left: auto; /* 靠最右側對齊 */
+    transition: transform 0.3s ease, color 0.3s ease;
+    flex-shrink: 0;
+}
+
+/* Hover 時箭頭跟著變亮 */
+.news-item-row:hover .news-arrow {
+    color: #ffffff;
+}
+
+/* 核心：隱藏的內容欄外殼（實現流暢動畫的秘訣） */
+.news-content-box {
+    max-height: 0; /* 預設高度為 0，完全隱藏 */
+    overflow: hidden; /* 超出部分遮罩 */
+    background: rgba(255, 255, 255, 0.02); /* 展開後內襯帶有一點點極淡的極簡灰底 */
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1); /* 絲滑的展開動態 */
+}
+
+/* 內容欄內部實體：負責提供舒服的留白（Padding） */
+.news-content-inner {
+    padding: 0px 30px 25px 30px; /* 頂部 0 是為了防止高度計算抖動 */
+    font-size: 14px;
+    line-height: 1.8;
+    color: #aaaaaa; /* 內文用低調內斂的亮灰字 */
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   當公告被點擊（啟動 .open 狀態）時的變化
+   ========================================================================== */
+
+/* 1. 攤開內容欄：給予足夠的 max-height，讓內容完整秀出來 */
+.news-item-wrapper-box.open .news-content-box {
+    max-height: 300px; /* 預估最大高度，只要大於實際內容高度即可 */
+}
+
+/* 2. 讓箭頭向下旋轉 90 度，代表已攤開 */
+.news-item-wrapper-box.open .news-arrow {
+    transform: rotate(90deg);
+    color: #ffffff;
+}
+
+/* 3. 讓正在被打開的標題列保持微亮底色 */
+.news-item-wrapper-box.open .news-item-row {
+    background: rgba(255, 255, 255, 0.03);
+}
+.news-item-wrapper-box.open .news-title {
+    color: #ffffff;
+}
