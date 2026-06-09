@@ -88,25 +88,31 @@ function submitPost() {
     submitBtn.disabled = true;
     submitBtn.innerText = "TRANSMITTING..._";
 
+    // === 將這段原本的 fetch 區塊替換掉 ===
+    // 轉換成 Google 100% 絕對能接收的表單參數格式
+    const formData = new URLSearchParams();
+    formData.append("author", author);
+    formData.append("content", content);
+
     // 發送 POST 請求到 Google Apps Script
     fetch(API_URL, {
         method: "POST",
         mode: "no-cors", // 配合 Google 重新導向機制
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/x-www-form-urlencoded" // 改用標準表單格式
         },
-        body: JSON.stringify({ author, content })
+        body: formData.toString()
     })
     .then(() => {
-        // 由於 no-cors 模式下拿不到回傳 JSON，我們直接預設成功處理
+        // 清空輸入框
         authorInput.value = "";
         contentInput.value = "";
         
-        // 進入發文冷卻計時（10秒），防止有人用按鈕惡意灌爆試算表
+        // 進入發文冷卻計時（10秒）
         startCooldown(10);
         
-        // 延遲 1.5 秒後重新讀取最新文章（給 Google 試算表一點點寫入的緩衝時間）
-        setTimeout(loadPosts, 1500);
+        // 延遲 2 秒後重新讀取最新文章（給 Google 試算表寫入的緩衝時間）
+        setTimeout(loadPosts, 2000);
     })
     .catch(err => {
         console.error(err);
