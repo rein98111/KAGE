@@ -39,12 +39,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 【譜面】分頁的資料
     const chartData = [
+		{
+            date: "2026.06.07",
+            tag: "圖譜",
+            class: "tag-map",
+            title: "譜面追加",
+            content: "曲名: Aegleseeker [mtk's Inner Oni]"
+        },
+		{
+            date: "2026.06.07",
+            tag: "圖譜",
+            class: "tag-map",
+            title: "譜面追加",
+            content: "曲名: 未来のヒーローたちへ (TV Size) [Oni]"
+        },
+		{
+            date: "2026.06.07",
+            tag: "圖譜",
+            class: "tag-map",
+            title: "譜面追加",
+            content: "曲名: A Bella! (feat. Lucy) [Chromoxx' Inner Oni]"
+        },
         {
             date: "2026.06.07",
             tag: "圖譜",
             class: "tag-map",
             title: "譜面追加",
-            content: "曲名: ...and Rescue Me (TV Size)<br>作曲家: Rainy.<br>譜面製作者: Charlotte (From osu!)<br>LV07<br>BPM: 129<br>時長: 1:17<br>AR9"
+            content: "曲名: ...and Rescue Me (TV Size)"
         }
     ];
 
