@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
             class: "tag-ann",
             title: "KAGE官網 玩家討論區 上線",
             content: "玩家現已可到玩家討論區留言。"
-        }
+        },
 	    {
             date: "2026.06.07",
             tag: "更新",
