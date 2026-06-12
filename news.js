@@ -7,6 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // 【公告】分頁的資料
     const announcementData = [
+		{
+            date: "2026.06.13",
+            tag: "公告",
+            class: "tag-ann",
+            title: "【更新預告】v0.1.5",
+            content: "版本 0.1.5 預計更新的遊戲內容<br>本地總分統計<br>結算畫面全版更新<br>按鍵計數器<br>Mod添加<br>譜面編輯器<br>7張新譜面"
+        },
 	    {
             date: "2026.06.10",
             tag: "公告",
